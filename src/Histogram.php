@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Prometheus;
 
 class Histogram extends Metric
@@ -7,7 +9,7 @@ class Histogram extends Metric
     public function __construct(array $opts = [])
     {
         parent::__construct($opts);
-        $this->buckets = isset($opts['buckets']) ? $opts['buckets'] : [1, 2, 3];
+        $this->buckets = $opts['buckets'] ?? [1, 2, 3];
     }
 
     public function type(): string

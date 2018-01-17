@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Prometheus;
 
 class Registry
@@ -19,7 +21,7 @@ class Registry
         return $metric;
     }
 
-    public function cleanup()
+    public function cleanup(): void
     {
         $this->metrics = [];
     }

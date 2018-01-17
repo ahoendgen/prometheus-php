@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
 if (!file_exists(__DIR__.'/src')) {
     exit(0);
 }
 
 return PhpCsFixer\Config::create()
     ->setRules([
+                   '@PHP71Migration' => true,
+                   '@PHP71Migration:risky' => true,
                    '@PSR2' => true,
                    '@Symfony' => true,
                    '@Symfony:risky' => true,

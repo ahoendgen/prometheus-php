@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Prometheus;
 
 class Client
@@ -55,7 +57,7 @@ class Client
         return $body;
     }
 
-    public function pushMetrics(string $job = null, string $instance = null)
+    public function pushMetrics(string $job = null, string $instance = null): void
     {
         $url = $this->base_uri;
 

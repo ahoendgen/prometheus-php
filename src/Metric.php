@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Prometheus;
 
 abstract class Metric
@@ -19,10 +21,10 @@ abstract class Metric
     public function __construct(array $opts = [])
     {
         $this->opts = $opts;
-        $this->name = isset($opts['name']) ? $opts['name'] : '';
-        $this->namespace = isset($opts['namespace']) ? $opts['namespace'] : '';
-        $this->subsystem = isset($opts['subsystem']) ? $opts['subsystem'] : '';
-        $this->help = isset($opts['help']) ? $opts['help'] : '';
+        $this->name = $opts['name'] ?? '';
+        $this->namespace = $opts['namespace'] ?? '';
+        $this->subsystem = $opts['subsystem'] ?? '';
+        $this->help = $opts['help'] ?? '';
 
         if (empty($this->name)) {
             throw new PrometheusException('A name is required for a metric');
@@ -68,7 +70,7 @@ abstract class Metric
         foreach ($this->values() as $val) {
             list($labels, $value) = $val;
             $label_pairs = [];
-            $suffix = isset($labels['__suffix']) ? $labels['__suffix'] : '';
+            $suffix = $labels['__suffix'] ?? '';
             unset($labels['__suffix']);
 
             foreach ($labels as $k => $v) {
