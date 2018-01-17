@@ -1,2 +1,3 @@
 metrics.proto
 vendor
+.php_cs.cache
