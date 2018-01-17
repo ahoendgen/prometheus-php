@@ -32,7 +32,7 @@ class Histogram extends Metric
         $labels['__suffix'] = '_bucket';
         foreach ($this->buckets as $bucket) {
             $labels['le'] = $bucket;
-            $hash = $this->hashLabels($labels);
+            $hash         = $this->hashLabels($labels);
             if (!isset($this->values[$hash])) {
                 $this->values[$hash] = $this->defaultValue();
             }
@@ -41,7 +41,7 @@ class Histogram extends Metric
             }
         }
         $labels['le'] = '+Inf';
-        $hash = $this->hashLabels($labels);
+        $hash         = $this->hashLabels($labels);
         if (!isset($this->values[$hash])) {
             $this->values[$hash] = $this->defaultValue();
         }
@@ -49,14 +49,14 @@ class Histogram extends Metric
         unset($labels['le']);
 
         $labels['__suffix'] = '_count';
-        $hash = $this->hashLabels($labels);
+        $hash               = $this->hashLabels($labels);
         if (!isset($this->values[$hash])) {
             $this->values[$hash] = $this->defaultValue();
         }
         $this->values[$hash] += 1;
 
         $labels['__suffix'] = '_sum';
-        $hash = $this->hashLabels($labels);
+        $hash               = $this->hashLabels($labels);
         if (!isset($this->values[$hash])) {
             $this->values[$hash] = $this->defaultValue();
         }

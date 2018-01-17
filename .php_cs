@@ -7,13 +7,16 @@ if (!file_exists(__DIR__.'/src')) {
 
 return PhpCsFixer\Config::create()
     ->setRules([
-                   '@PHP71Migration' => true,
-                   '@PHP71Migration:risky' => true,
-                   '@PSR2' => true,
-                   '@Symfony' => true,
-                   '@Symfony:risky' => true,
-                   'array_syntax' => ['syntax' => 'short'],
-                   'protected_to_private' => false,
+                   '@PHP71Migration'        => true,
+                   '@PHP71Migration:risky'  => true,
+                   '@PSR2'                  => true,
+                   '@Symfony'               => true,
+                   '@Symfony:risky'         => true,
+                   'array_syntax'           => ['syntax' => 'short'],
+                   'protected_to_private'   => false,
+                   'binary_operator_spaces' => [
+                       'default' => 'align',
+                   ],
                ])
     ->setRiskyAllowed(true)
     ->setFinder(

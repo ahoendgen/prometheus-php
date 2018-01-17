@@ -20,11 +20,11 @@ abstract class Metric
 
     public function __construct(array $opts = [])
     {
-        $this->opts = $opts;
-        $this->name = $opts['name'] ?? '';
+        $this->opts      = $opts;
+        $this->name      = $opts['name']      ?? '';
         $this->namespace = $opts['namespace'] ?? '';
         $this->subsystem = $opts['subsystem'] ?? '';
-        $this->help = $opts['help'] ?? '';
+        $this->help      = $opts['help']      ?? '';
 
         if (empty($this->name)) {
             throw new PrometheusException('A name is required for a metric');
@@ -63,20 +63,20 @@ abstract class Metric
 
     public function serialize(): string
     {
-        $tbr = [];
+        $tbr   = [];
         $tbr[] = '# HELP '.$this->full_name.' '.$this->help;
         $tbr[] = '# TYPE '.$this->full_name.' '.$this->type();
 
         foreach ($this->values() as $val) {
             list($labels, $value) = $val;
-            $label_pairs = [];
-            $suffix = $labels['__suffix'] ?? '';
+            $label_pairs          = [];
+            $suffix               = $labels['__suffix'] ?? '';
             unset($labels['__suffix']);
 
             foreach ($labels as $k => $v) {
-                $v = str_replace('"', '\\"', $v);
-                $v = str_replace("\n", '\\n', $v);
-                $v = str_replace('\\', '\\\\', $v);
+                $v             = str_replace('"', '\\"', $v);
+                $v             = str_replace("\n", '\\n', $v);
+                $v             = str_replace('\\', '\\\\', $v);
                 $label_pairs[] = "$k=\"$v\"";
             }
             $tbr[] = $this->full_name.$suffix.'{'.implode(',', $label_pairs).'} '.$value;
@@ -87,7 +87,7 @@ abstract class Metric
 
     protected function hashLabels(array $labels = []): string
     {
-        $hash = md5(json_encode($labels, JSON_FORCE_OBJECT));
+        $hash                = md5(json_encode($labels, JSON_FORCE_OBJECT));
         $this->labels[$hash] = $labels;
 
         // TODO: save to memcached
